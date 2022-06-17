@@ -149,22 +149,27 @@ Module.register("concertcalendar",{
 		data.forEach((concert) => {
 			var city = concert.City.split(",");
 
+			if (concert.city !== null) {
+			var city = concert.city.split(",");
+
+
 			if (city.length > 0) {
 				cityToAdd = city[0];
 				if (city[0].length > 9)
 					cityToAdd = city[0].substring(0,9)+"..";
 
-				artistToAdd = concert.Artist;
-				if (artistToAdd.length > 10)
-					artistToAdd = artistToAdd.substring(0,10)+"..";
+				artistToAdd = concert.artist;
+				if (artistToAdd.length > 17)
+					artistToAdd = artistToAdd.substring(0,17)+"..";
 
-				var date = new Date(concert.Date);
+				var date = new Date(concert.date);
 				this.concerts.push({
 					artist: artistToAdd.trim(),
 					city: cityToAdd.trim(),
 					concertDate: date.getDate()+"/"+(date.getMonth()+1)
 				});
 			}
+		}
 		});
 
 		this.loaded = true;
